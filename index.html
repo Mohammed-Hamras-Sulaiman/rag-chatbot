@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Chatbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
+        <h1 class="text-2xl font-bold mb-4 text-center">RAG Chatbot</h1>
+        <div class="mb-4">
+            <label for="session_id" class="block text-sm font-medium text-gray-700">Session ID</label>
+            <input type="text" id="session_id" value="test_session" class="mt-1 p-2 w-full border rounded-md" placeholder="Enter session ID">
+        </div>
+        <div class="mb-4">
+            <label for="question" class="block text-sm font-medium text-gray-700">Ask a Question</label>
+            <input type="text" id="question" class="mt-1 p-2 w-full border rounded-md" placeholder="e.g., What is FAISS?">
+        </div>
+        <button onclick="sendQuestion()" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Submit</button>
+        <div id="response" class="mt-4 p-4 bg-gray-50 rounded-md hidden">
+            <h2 class="text-lg font-semibold">Answer:</h2>
+            <p id="answer" class="text-gray-800"></p>
+            <h2 class="text-lg font-semibold mt-2">Sources:</h2>
+            <ul id="sources" class="list-disc pl-5 text-gray-600"></ul>
+        </div>
+    </div>
+    <script>
+        async function sendQuestion() {
+            const question = document.getElementById('question').value;
+            const session_id = document.getElementById('session_id').value;
+            const responseDiv = document.getElementById('response');
+            const answerP = document.getElementById('answer');
+            const sourcesUl = document.getElementById('sources');
+
+            if (!question) {
+                alert('Please enter a question.');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question, session_id })
+                });
+                if (!response.ok) throw new Error('Network error');
+                const data = await response.json();
+                answerP.textContent = data.answer;
+                sourcesUl.innerHTML = data.sources.map(source => `<li>${source.content.substring(0, 100)}... (File: ${source.filename})</li>`).join('');
+                responseDiv.classList.remove('hidden');
+            } catch (error) {
+                answerP.textContent = `Error: ${error.message}`;
+                sourcesUl.innerHTML = '';
+                responseDiv.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
