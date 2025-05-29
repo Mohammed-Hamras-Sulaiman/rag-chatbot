@@ -3,6 +3,7 @@ import logging
 import shutil
 import re
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 from langchain_community.document_loaders import PyMuPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -173,6 +174,16 @@ def get_qa_chain():
         retriever=vector_store.as_retriever(search_kwargs={"k": 7}),
         chain_type_kwargs={"prompt": prompt}
     )
+
+@app.get("/", response_class=HTMLResponse)
+async def get_ui():
+    try:
+        with open("index.html", "r") as f:
+            html_content = f.read()
+        return HTMLResponse(content=html_content, status_code=200)
+    except Exception as e:
+        logger.error(f"Error serving UI: {str(e)}")
+        raise HTTPException(status_code=500, detail="Error serving UI")
 
 @app.post("/chat", summary="Ask a question to the RAG chatbot", response_description="Returns the answer and sources")
 async def chat(request: ChatRequest):
