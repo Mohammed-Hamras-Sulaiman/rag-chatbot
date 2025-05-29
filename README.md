@@ -8,6 +8,7 @@ A Retrieval-Augmented Generation (RAG) chatbot designed to answer user queries b
 - 🔍 Retrieves relevant context from PDFs using FAISS (with `k=7` neighbors).
 - 🤖 Generates answers using `google/flan-t5-base` via LangChain's `RetrievalQA`.
 - 🌐 FastAPI `/chat` endpoint with optional source tracking.
+- 💬 Simple HTML frontend (`index.html`) to interact with the chatbot.
 - 🧪 Includes a debug script to test document retrieval.
 
 ## 📦 Setup
@@ -17,6 +18,7 @@ A Retrieval-Augmented Generation (RAG) chatbot designed to answer user queries b
    ```bash
    git clone https://github.com/<your_username>/rag-chatbot.git
    cd rag-chatbot
+`
 
 2. **Create & Activate a Virtual Environment**
 
@@ -55,6 +57,18 @@ A Retrieval-Augmented Generation (RAG) chatbot designed to answer user queries b
    ```bash
    python debug_retrieval.py
    ```
+
+## 🌐 Using the Frontend (`index.html`)
+
+This project includes a lightweight HTML interface (`index.html`) for sending questions to the chatbot and displaying responses directly in the browser.
+
+### Steps to Use:
+
+1. Ensure the FastAPI server is running (`uvicorn rag_chat_api:app --reload`)
+2. Open `index.html` in any modern browser (e.g., Chrome, Firefox)
+3. Type a question and click **"Ask"** to receive a real-time response from the chatbot
+
+---
 
 ## 🔗 API Usage
 
@@ -95,6 +109,8 @@ A Retrieval-Augmented Generation (RAG) chatbot designed to answer user queries b
 
   [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
+---
+
 ## 📁 Project Structure
 
 ```
@@ -103,10 +119,23 @@ rag-chatbot/
 ├── rag_chatbot.py         # LangChain-based RAG pipeline
 ├── debug_retrieval.py     # Script to test/document retrieval
 ├── sample.pdf             # Sample document (user-provided)
+├── index.html             # Frontend interface (browser-based)
+├── screenshots/           # Contains UI screenshot(s)
+│   └── ui.png
 ├── requirements.txt       # Python dependencies
 ├── architecture.md        # Architecture overview (optional)
 └── README.md              # This file
 ```
+
+---
+
+## 🖼️ Screenshot
+
+Here’s how the HTML frontend looks when querying the chatbot:
+
+![Chatbot UI Screenshot](screenshots/ui.png)
+
+---
 
 ## 🛠️ Technologies Used
 
@@ -116,11 +145,17 @@ rag-chatbot/
 * FAISS (Facebook AI Similarity Search)
 * FastAPI
 * PyMuPDF
+* HTML/JavaScript (for frontend)
 
 ## 📌 Notes
 
 * Set `k` in the FAISS retriever to control how many chunks to retrieve.
-* This project is **local only** and does not require internet after model is downloaded.
+* This project is **local only** and does not require internet after the model is downloaded.
 
 ---
+
+````
+
+
+
 
