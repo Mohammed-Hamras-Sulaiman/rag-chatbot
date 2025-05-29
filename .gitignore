@@ -1,0 +1,8 @@
+echo .env> .gitignore
+echo faiss_index/>> .gitignore
+echo __pycache__/>> .gitignore
+echo *.log>> .gitignore
+echo *.json>> .gitignore
+echo ai_wikipedia.pdf.pdf>> .gitignore
+echo $test.output>> .gitignore
+echo check.py>> .gitignore
