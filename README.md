@@ -17,7 +17,6 @@ A Retrieval-Augmented Generation (RAG) chatbot developed for the RAG Chatbot Ass
    ```bash
    git clone https://github.com/<your_username>/rag-chatbot.git
    cd rag-chatbot
-````
 
 2. **Create & Activate a Virtual Environment**
 
