@@ -1,7 +1,7 @@
 
 # 🧠 RAG Chatbot
 
-A Retrieval-Augmented Generation (RAG) chatbot developed for the RAG Chatbot Assessment.
+A Retrieval-Augmented Generation (RAG) chatbot designed to answer user queries by retrieving relevant context from documents and generating accurate responses using a language model. Built as part of the RAG Chatbot Assessment, this project demonstrates document retrieval, question answering, and API integration using modern NLP tools.
 
 ## 🚀 Features
 
