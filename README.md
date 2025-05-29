@@ -125,11 +125,3 @@ rag-chatbot/
 
 ---
 
-Feel free to contribute or raise issues if you're improving or testing the RAG chatbot. Happy building! 🚀
-
-```
-
----
-
-Let me know if you want a `LICENSE` file, `.gitignore`, or GitHub Actions for deployment/testing too!
-```
